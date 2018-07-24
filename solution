@@ -1,0 +1,28 @@
+using System;
+
+class Solution {
+    public int solution(int[] A) {
+        // First calculate sum of complete array as `sum_right`
+        long sum_right = 0;
+        for (int i = 0; i < A.Length; i++)
+        {
+            sum_right += A[i];
+        }
+
+        // start calculating sum from left side (lower index) as `sum_left`
+        // in each iteration subtract A[i] from complete array sum - `sum_right`
+        long sum_left = 0;
+        for (int p = 0; p < A.Length; p++)
+        {
+            sum_left += p - 1 < 0 ? 0: A[p-1];
+            sum_right -= A[p];
+            if (sum_left == sum_right)
+            {
+                 return p;
+            }
+        }
+        return -1;
+
+
+    }
+}
